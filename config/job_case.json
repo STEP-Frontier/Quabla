@@ -1,0 +1,34 @@
+{
+    "Job":[
+        {
+            "Mode":"single",
+            "Name":"Ideal",
+            "Wind Model": "No"
+        },
+        {
+            "Mode":"single",
+            "Name":"Nominal",
+            "Wind Model": "Power"
+        },
+        {
+            "Mode":"single",
+            "Name":"Statistical",
+            "Wind Model": "Original"
+        },
+        {
+            "Mode":"multi",
+            "Elevation Error [deg]":0.0,
+            "nProc": 4
+        },
+        {
+            "Mode":"multi",
+            "Elevation Error [deg]":2.0,
+            "nProc": 4
+        },
+        {
+            "Mode":"multi",
+            "Elevation Error [deg]":-2.0,
+            "nProc": 4
+        }
+    ]
+}
