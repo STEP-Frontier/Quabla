@@ -55,7 +55,7 @@ public class Atmosphere {
 	public double getSoundSpeed(double alt) {
 		double Cs; //[m/s] sound speed
 
-		Cs = 20.0468 * Math.sqrt(getTemperture(alt) + 237.15);
+		Cs = 20.0468 * Math.sqrt(getTemperture(alt) + 273.15);
 
 		return Cs;
 	}
