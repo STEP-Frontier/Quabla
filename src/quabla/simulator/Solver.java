@@ -84,14 +84,13 @@ public class Solver {
 	        // Change ODE solver
 			if(index == 4) {
 				predCorr.setDelta(deltaArray[2], deltaArray[1], deltaArray[0]);
-				// ODE 解法の変更
-				ODEsolver = predCorr;
+				ODEsolver = predCorr;	// ODE解法の変更
 			}
 
 			//  solve ODE
-			double[] delta = ODEsolver.compute(variableTrajectory, dynamics);
-			variableTrajectory.update(ODEsolver.getTimeStep(), delta);
-			trajectoryLog.log(variableTrajectory, ODEsolver.getTimeStep());
+			double[] delta = ODEsolver.compute(variableTrajectory, dynamics);	// 
+			variableTrajectory.update(ODEsolver.getTimeStep(), delta);			// 基礎変数の更新
+			trajectoryLog.log(variableTrajectory, ODEsolver.getTimeStep());		// ログ記録
 			
 			// 最初の3回はRunge-Kuttaで解く
 			if(index <= 3) {

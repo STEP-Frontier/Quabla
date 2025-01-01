@@ -59,11 +59,11 @@ public class QUABLA {
 			Rocket rocket = new Rocket(node);
 			rocket.outputSpec(filepathResultFinal, simulationMode);
 			Solver solver = new Solver(filepathResultFinal);
-			solver.solveDynamics(rocket);
-			solver.makeResult();
-			solver.outputResultTxt();
-			solver.outputResultSummary();
-			solver.outputLandPoint();
+			solver.solveDynamics(rocket);		// 飛翔軌道メイン計算
+			solver.makeResult();				// 計算結果出力
+			solver.outputResultTxt();			// 計算結果サマリー出力
+			solver.outputResultSummary();		// Pythonに渡す用のイベント値出力
+			solver.outputLandPoint();			// 落下地点出力
 			break;
 
 		case "multi":
@@ -71,10 +71,10 @@ public class QUABLA {
 
 			String filepathResultMulti = args[2];
 			String filepathResultMultiFinal = filepathResultMulti + File.separator;
-			int procCpuMax = Integer.parseInt(args[3]);
+			int procCpuMax = Integer.parseInt(args[3]);	// 並列計算のプロセス数取得
 
 			MultiSolver multiSolver = new MultiSolver(filepathResultMultiFinal, node.get("Multi Solver"), node.get("Payload").get("Payload Exist").asBoolean(), procCpuMax);
-			multiSolver.solveMulti(node);
+			multiSolver.solveMulti(node);				// メイン計算
 			break;
 		}
 
