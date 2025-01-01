@@ -10,60 +10,55 @@ import quabla.simulator.numerical_analysis.Interpolation;
 public class Engine {
 
 	public final double
-	// dth, // Diameter of throat
-	// eps, // Expansion ratio
-	// Ath, // Area of throat
 	Ae, // Area of outlet
 	de; // diameter of throat
 	private double
-	dFuelInBef,
-	dFuelInAft,
-	dFuelOut,
-	lFuel;
+	dFuelInBef,						// グレイン内径（燃焼前）
+	dFuelInAft,						// グレイン内径（燃焼後）
+	dFuelOut,						// グレイン外径
+	lFuel;							// グレイン全長
 	private double
-	lTank,
-	dTank,
-	distanceTank;
+	lTank,							// タンク全長
+	dTank,							// タンク直径
+	distanceTank;					// タンク口金位置（タンクネジ穴と機体後端までの距離）
 	public final  double
-	mOxBef,
-	mFuelBef,
-	mFuelAft;
-	private double mDotFuel;
-	// エンジン関連の重心は全部エンジン後端(ノズル側)からの長さ
+	mOxBef,							// 酸化剤質量（燃焼前）
+	mFuelBef,						// グレイン質量（燃焼前）
+	mFuelAft;						// グレイン質量（燃焼後）
+	private double 
+	mDotFuel;						// グレイン質量流量
+	/* エンジン関連の重心は全部エンジン後端(ノズル側)からの長さ */
 	public final double
-	lcgFuel,
-	lcgOxBef,
-	lcgOxAft;
-	/** 燃料重心回りの慣性モーメント */
+	lcgFuel,						// グレイン重心
+	lcgOxBef,						// 酸化剤重心（燃焼前）
+	lcgOxAft;						// 酸化剤重心（燃焼後）
+	/* 燃料重心回りの慣性モーメント */
 	public final  double
-	IjFuelPitchBef,
-	IjFuelRollBef,
-	IjFuelPitchAft,
-	IjFuelRollAft;
+	IjFuelPitchBef,					// 燃料ピッチ軸慣性モーメント（燃焼前）
+	IjFuelRollBef,					// 燃料ロール軸慣性モーメント（燃焼前）
+	IjFuelPitchAft,					// 燃料ピッチ軸慣性モーメント（燃焼後）
+	IjFuelRollAft;					// 燃料ロール軸慣性モーメント（燃焼後）
 	public final double
-	IjOxPitchBef,
-	IjOxRollBef;
+	IjOxPitchBef,					// 酸化剤ピッチ軸慣性モーメント（燃焼前）
+	IjOxRollBef;					// 酸化剤ロール軸慣性モーメント（燃焼前）
 	private Interpolation
-	thrustAnaly,
-	mDotPropAnaly,
-	// mFuelAnaly,
-	mOxAnaly,
-	lcgOxAnaly;
+	thrustAnaly,					// 推力補間用インスタンス
+	mDotPropAnaly,					// 推進剤質量流量補間用インスタンス
+	mOxAnaly,						// 酸化剤質量補間用インスタンス
+	lcgOxAnaly;						// 酸化剤重心補間用インスタンス
 	public final double
-	timeBurnout,
-	timeActuate;
-	private double IspAve;
-	private double totalImpulse;
-	private double thrustAve;
-	private double mDotPropAve;
+	timeBurnout,					// 燃焼時間
+	timeActuate;					// 作動時間
+	private double IspAve;			// 平均比推力
+	private double totalImpulse;	// トータルインパルス
+	private double thrustAve;		// 平均推力
+	private double mDotPropAve;		// 推進剤平均質量流量
 
 	public Engine(JsonNode engine) {
 
-		// Specific thrust
-		// IspAve = engine.get("Isp [sec]").asDouble();
 		timeBurnout = engine.get("Burn Time [sec]").asDouble();
 
-		mOxBef = (engine.get("Tank Volume [cc]").asDouble() * Math.pow(10, -6)) * engine.get("Oxidizer Density [kg/m^3]").asDouble();
+		mOxBef	 = (engine.get("Tank Volume [cc]").asDouble() * Math.pow(10, -6)) * engine.get("Oxidizer Density [kg/m^3]").asDouble();
 		mFuelBef = engine.get("Fuel Mass Before [kg]").asDouble();
 		mFuelAft = engine.get("Fuel Mass After [kg]").asDouble();
 		mDotFuel = (mFuelBef - mFuelAft) / timeBurnout;
@@ -75,11 +70,11 @@ public class Engine {
 		 *  1st Column : Time [s]
 		 *  2nd Column : Thrust@Ground [N] **/
 		double[][] thrustData = GetCsv.get2ColumnArray(engine.get("Thrust Curve").asText());
-		double[] timeArray   = new double[thrustData.length];
-		double[] thrustArray = new double[thrustData.length];
-		double[] mDotPropLog = new double[thrustData.length];
-		double[] mDotFuelLog = new double[thrustData.length];
-		double[] mDotOxLog   = new double[thrustData.length];
+		double[] timeArray    = new double[thrustData.length];
+		double[] thrustArray  = new double[thrustData.length];
+		double[] mDotPropLog  = new double[thrustData.length];
+		double[] mDotFuelLog  = new double[thrustData.length];
+		double[] mDotOxLog    = new double[thrustData.length];
 		
 		// Thin out of thrust data
 		int lengthInterpRaw = Math.min(thrustData.length, 101);
@@ -98,10 +93,10 @@ public class Engine {
 			thrustArray[i] = thrustData[i][1];
 		}
 		thrustArray[thrustArray.length - 1] = 0.0;
-		totalImpulse = getSum(timeArray, thrustArray);
-		thrustAve = totalImpulse / timeBurnout;
-		mDotPropAve = mDotFuel + mOxBef / timeBurnout;
-		IspAve = thrustAve / (mDotPropAve * 9.80665);
+		totalImpulse = getSum(timeArray, thrustArray);		// トータルインパルス算出
+		thrustAve = totalImpulse / timeBurnout;				// 平均推力算出
+		mDotPropAve = mDotFuel + mOxBef / timeBurnout;		// 推進剤平均質量流量算出
+		IspAve = thrustAve / (mDotPropAve * 9.80665);		// 平均比推力算出
 		int j = 0;
 		for (int i = 0; i < mDotOxLog.length; i++) {
 			mDotPropLog[i] = thrustArray[i] / (IspAve * 9.80665);
@@ -189,8 +184,8 @@ public class Engine {
 			lcgOxLog[i] = calculateLcgOx.apply(mOxLog[i]);
 			
 			if (i % stepInterpRaw == 0) {
-				timeInterpRaw[j] = timeArray[i];
-				lcgOxInterpRaw[j] = lcgOxLog[i];
+				timeInterpRaw[j]	= timeArray[i];
+				lcgOxInterpRaw[j]	= lcgOxLog[i];
 				j ++;
 			}
 		}
@@ -209,6 +204,8 @@ public class Engine {
 	}
 
 	/**
+	 * 推進剤質量流量取得
+	 * @param t 時間
 	 * @return 推進剤質量時間変化率。正の値で返されるので注意
 	 * */
 	public double getMdotProp(double t) {
@@ -232,7 +229,6 @@ public class Engine {
 	public double getMassOx(double t) {
 		if(t < timeActuate) {
 			return mOxAnaly.linearInterp1column(t);
-			// return mOxBef *(1 -  t / timeBurnout);
 		}else {
 			return 0.0;
 		}
@@ -300,7 +296,9 @@ public class Engine {
 		}
 	}
 
-	/**
+	/** 
+	 * 酸化剤ピッチ軸慣性モーメント取得
+	 * <p>
 	 * スロッシングの影響を無視。
 	 * 液体酸化剤を一様円柱と仮定。
 	 * @return 酸化剤重心回りの酸化剤のPitch慣性モーメント
