@@ -10,6 +10,8 @@ bin/
 /src/quabla/parameter
 /Result_*
 __pycache__/
+venv/
+.venv/
 *.jar
 lib/*
 !lib/setup_jackson.py
