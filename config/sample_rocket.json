@@ -56,7 +56,8 @@
 		"Safety Area Exist": false,
 		"__comment5" : "If you don't consider magnetic azimuth, please enter 0.0",
 		"__comment6" : "運営から配らたもの使ってください",
-		"Input Magnetic Azimuth [deg]": 8.95
+		"Input Magnetic Azimuth [deg]": 8.95,
+		"__comment7" : "磁気偏角は，磁北と真北の差のことです。磁気偏角が東向きなら正，西向きなら負の値を入力してください。"
 	},
 
 	"Structure": {

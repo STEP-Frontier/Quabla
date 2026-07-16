@@ -37,7 +37,9 @@ public class Atmosphere {
 		double pressure0 = 101325;//[Pa] atomospheric pressure at 0 m
 		double gamma = -5.256;
 
-		pressure = pressure0 * Math.pow(288.15 / (273.15 + getTemperture(alt)), gamma);
+		//pressure = pressure0 * Math.pow(288.15 / (273.15 + getTemperture(alt)), gamma);
+		pressure = pressure0*Math.pow((273.15 + temprture0)/(273.15 + getTemperture(alt)), gamma);
+		
 
 		return pressure ;
 	}

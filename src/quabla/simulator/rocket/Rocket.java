@@ -256,7 +256,8 @@ public class Rocket extends AbstractRocket {
 		lengthLauncherRail = launchCond.get("Launcher Rail Length [m]").asDouble();
 		elevationLauncher  = launchCond.get("Launch Elevation [deg]").asDouble();
 		azimuthLauncher    = launchCond.get("Launch Azimuth [deg]").asDouble();
-		magneticDec        = Math.abs(launchCond.get("Input Magnetic Azimuth [deg]").asDouble());
+		//magneticDec        = Math.abs(launchCond.get("Input Magnetic Azimuth [deg]").asDouble());
+		magneticDec		= launchCond.get("Magnetic Declination [deg]").asDouble();
 		existTipOff        = launchCond.get("Tip-Off Calculation Exist").asBoolean();
 		if (existTipOff) {
 			upperLug = structure.get("Upper Launch Lug [m]").asDouble();
