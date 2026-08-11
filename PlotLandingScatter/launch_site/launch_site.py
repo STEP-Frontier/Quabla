@@ -86,7 +86,8 @@ class LaunchSite():
                 # Polygon
                 if self.type_safety == 'polygon':
                     obj.plot_polygon(self.safety_NED)
-                    obj.plot_circle(np.array([0.0, 0.0, 0.0]), 50.0)
+                    obj.plot_circle(np.array([0.0, 0.0, 0.0]), 0.001)
+                    #ここで保安円を描画する
                 # Circle
                 elif self.type_safety == 'circle':
                     obj.plot_circle(self.center_circle_ENU, self.radius)
@@ -99,7 +100,8 @@ class LaunchSite():
         # Polygon
         if self.type_safety == 'polygon':
             jip = JudgeInsidePoly(self.safety_NED)
-            jic = JudgeInsideCircle(np.array([0.0, 0.0]), 50.0)
+            jic = JudgeInsideCircle(np.array([0.0, 0.0]), 0.001)
+        #ここで保安円に入っているかどうかの判定を行う
         # Circle
         elif self.type_safety == 'circle':
             jic = JudgeInsideCircle(self.center_circle_ENU, self.radius)

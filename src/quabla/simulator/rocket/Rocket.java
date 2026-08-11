@@ -90,19 +90,19 @@ public class Rocket extends AbstractRocket {
 		if(spec.get("Wind").get("Wind File Exist").asBoolean() && QUABLA.simulationModeCheck.equals("single")) {
 			wind = new Original(
 					spec.get("Wind").get("Wind File").asText(),
-					launchCond.get("Input Magnetic Azimuth [deg]").asDouble());
+					launchCond.get("Magnetic Declination [deg]").asDouble());
 		}else if(spec.get("Wind").get("Wind Model").asText().equals("law")){
 			wind = new Power(
 					spec.get("Wind").get("Wind Speed [m/s]").asDouble(),
 					spec.get("Wind").get("Wind Azimuth [deg]").asDouble(),
 					spec.get("Wind").get("Wind Reference Altitude [m]").asDouble(),
 					spec.get("Wind").get("Wind Power Law Coefficient").asDouble(),
-					launchCond.get("Input Magnetic Azimuth [deg]").asDouble());
+					launchCond.get("Magnetic Declination [deg]").asDouble());
 		}else {
 			wind  = new Constant(
 					spec.get("Wind").get("Wind Speed [m/s]").asDouble(),
 					spec.get("Wind").get("Wind Azimuth [deg]").asDouble(),
-					launchCond.get("Input Magnetic Azimuth [deg]").asDouble());
+					launchCond.get("Magnetic Declination [deg]").asDouble());
 		}
 
 		// For Interpolation
