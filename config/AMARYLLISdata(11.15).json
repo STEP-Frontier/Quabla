@@ -50,7 +50,7 @@
 		"Launch lon" : 135.09059,
 		"Launch height" : 90.0,
 		"Launch Azimuth [deg]": 315.0,
-		"Launch Elevation [deg]": 88.0,
+		"Launch Elevation [deg]": 84.0,
 		"Launcher Rail Length [m]": 5.0,
 		"__comment3" : "ガントリー式などチップオフを考慮しない場合はfalse",
 		"Tip-Off Calculation Exist": false,
@@ -72,9 +72,11 @@
 	},
 
 	"Engine":{
-		"Thrust Curve":"config/AB1b1st_thrust.csv",
+		"__comment_thrust" : "推力は 11/3 地燃（loadcell20261103171415）のドリフト補正版 thrustcurve_fixed を 2 列にしたもの（0〜4.14 s、610.6 N·s。5%区間0〜3.18 sだけなら601.5 N·s）。CSVは内部情報のためリポジトリに含めない",
+		"Thrust Curve":"config/AB1b20261103_fixed.csv",
 		"Nozzle Exit Diameter [mm]": "19",
-		"Burn Time [sec]": 2.26,
+		"__comment_burn" : "燃焼時間は仮（主燃焼の折れ目 約2.4 s）。定義未確定。作動時間（5%）は 3.18 s。2.26〜2.75 s で結果は変わらないことを確認済み",
+		"Burn Time [sec]": 2.4,
 		"Tank Volume [cc]": 440.0,
 		"Oxidizer Density [kg/m^3]": "998",
 		"Length Fuel-C.G. from End [m]": 0.155,
