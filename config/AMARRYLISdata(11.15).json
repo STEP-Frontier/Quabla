@@ -1,0 +1,121 @@
+{
+	"Define Comment": {
+		"Default_Unit": "m_kg_sec",
+		"Fuel": "Fuel-Grain-Cartridge",
+		"Dry": "Liftoff - Oxidizer",
+		"C.G.": "Center of Gravity",
+		"C.P.": "Center of Pressure",
+		"LLH":"Latitude, Longitude, Height",
+		"Elevation": "Ground to Up _ 0deg 90deg",
+		"Azimuth": "North to East (clockwise) _ 0deg 360deg"
+	},
+
+	"Solver": {
+		"Name": "AMARYLLIS",
+		"Result Filepath":"",
+		"Time Step [sec]": 0.001
+	},
+
+	"Multi Solver": {
+		"__comment": "落下分散(multiモード)を計算しない場合はそのままでOK",
+		"Minimum Wind Speed [m/s]": 0.0,
+		"Step Wind Speed [m/s]": 0.1,
+		"Number of Wind Speed": 41,
+		"Number of Wind Azimuth": 16,
+		"Base Wind Azimuth [deg]" : 0
+	},
+
+	"Wind":{
+		"__comment" : "上空風データ(csv)を使う場合はWind File ExistをtrueにしてWind Fileにパスを入力。使わない場合はfalseのままWind Speed等を入力",
+		"Wind File Exist": false,
+		"Wind File": "",
+		"Wind Model":"law",
+		"__comment_law": "べき法則係数。陸打ち:4.5、海打ち:6.0が目安（運営指定があればそれに従う）",
+		"Wind Power Law Coefficient": 4.5,
+		"Wind Speed [m/s]": 0.0,
+		"Wind Azimuth [deg]": 0.0,
+		"Wind Reference Altitude [m]": 2.0
+	},
+
+	"Atmosphere":{
+		"Temperature at 0 m [℃]":"15"
+	},
+
+	"Launch Condition": {
+		"Date": "2027/03/25 8:30:00.0",
+		"__comment1" : "1:oshima_land , 2:oshima_sea, 3:noshiro_land, 4:noshiro_sea, 5:kada（input/launch_site.json に登録）。\"0\":other は Quabla 側が未実装で落ちる",
+		"Site":"5",
+		"__comment2" : "登録済みの射場では Launch lat/lon/height は使われない（射場の登録値が優先）",
+		"Launch lat" : 34.2852,
+		"Launch lon" : 135.09059,
+		"Launch height" : 90.0,
+		"Launch Azimuth [deg]": 315.0,
+		"Launch Elevation [deg]": 88.0,
+		"Launcher Rail Length [m]": 5.0,
+		"__comment3" : "ガントリー式などチップオフを考慮しない場合はfalse",
+		"Tip-Off Calculation Exist": false,
+		"__comment4" : "落下分散図に保安円を出力したいならtrue",
+		"Safety Area Exist": true,
+		"__comment5" : "磁気偏角。考慮しない場合は0.0（基本は運営配布の値を使用）",
+		"Input Magnetic Azimuth [deg]": 7.4
+	},
+
+	"Structure": {
+		"Length [m]": 1.640,
+		"Diameter [m]": 0.112,
+		"Dry Mass [kg]":7.293,
+		"Dry Length-C.G. from Nosetip [m]": 0.943,
+		"Dry Moment of Inertia Roll-Axis [kg*m^2]":"0.012157",
+		"Dry Moment of Inertia  Pitch-Axis [kg*m^2]":"2.0725",
+		"Upper Launch Lug [m]": "0.386263",
+		"Lower Launch Lug [m]": "0.256218"
+	},
+
+	"Engine":{
+		"Thrust Curve":"config/AB1b1st_thrust.csv",
+		"Nozzle Exit Diameter [mm]": "19",
+		"Burn Time [sec]": 2.26,
+		"Tank Volume [cc]": 440.0,
+		"Oxidizer Density [kg/m^3]": "998",
+		"Length Fuel-C.G. from End [m]": 0.155,
+		"Length Tank-End from End [m]": "0.30",
+		"Fuel Mass Before [kg]": 0.27424,
+		"Fuel Mass After [kg]": 0.22903,
+		"Fuel Outside Diameter [mm]": "46",
+		"Fuel Inside Diameter [mm]": "25.17",
+		"Tank Diameter [mm]": "50.5",
+		"Fuel Length [m]": "0.23",
+		"Tank Length [m]": "0.333"
+	},
+
+	"Parachute": {
+		"1st Parachute CdS [m2]": "0.5",
+		"Parachute Opening Lag [sec]": "0.0",
+		"2nd Parachute Exist": false,
+		"2nd Parachute CdS [m2]": "★2段目パラシュートのCdS",
+		"2nd Parachute Opening Altitude [m]": "★2段目開傘高度",
+		"2nd Parachute Timer Mode": false,
+		"2nd Timer [s]":"★タイマーモード時の開傘時間"
+	},
+
+	"Aero":{
+		"__comment": "マッハ数依存を考慮する場合は対応するFile Existをtrueにしてcsvパスを指定。考慮しない場合はfalseのままConstant値を入力",
+		"Cd File": "config/Cd.csv",
+		"Cd File Exist":false,
+		"Constant Cd":"0.53",
+		"Length-C.P. File": "config/Lcp.csv",
+		"Length-C.P. File Exist":false,
+		"Constant Length-C.P. from Nosetip [m]": 1.2415,
+		"CNa File": "config/CNa.csv",
+		"CNa File Exist":false,
+		"Constant CNa": 9.102,
+		"Roll Dumping Moment Coefficient Clp": "-0.019",
+		"Pitch Dumping Moment Coefficient Cmq": "-3.03"
+	},
+
+	"Payload":{
+		"Payload Exist": false,
+		"Mass [kg]": "★",
+		"Parachute CdS [m2]": "★"
+	}
+}
