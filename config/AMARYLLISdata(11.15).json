@@ -56,8 +56,8 @@
 		"Tip-Off Calculation Exist": false,
 		"__comment4" : "落下分散図に保安円を出力したいならtrue",
 		"Safety Area Exist": true,
-		"__comment5" : "磁気偏角。考慮しない場合は0.0（基本は運営配布の値を使用）",
-		"Input Magnetic Azimuth [deg]": 7.4
+		"__comment5" : "磁気偏角（運営配布の値）。このQuablaは 真方位=磁方位−値 で計算するので、加太（西偏7.4°）は +7.4。sample_rocket.json の注記『西向きなら負』はコードと逆なので従わない（従うと約15°ずれる）",
+		"Magnetic Declination [deg]": 7.4
 	},
 
 	"Structure": {
