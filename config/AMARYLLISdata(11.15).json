@@ -19,8 +19,8 @@
 	"Multi Solver": {
 		"__comment": "落下分散(multiモード)を計算しない場合はそのままでOK",
 		"Minimum Wind Speed [m/s]": 0.0,
-		"Step Wind Speed [m/s]": 0.1,
-		"Number of Wind Speed": 41,
+		"Step Wind Speed [m/s]": 0.5,
+		"Number of Wind Speed": 7,
 		"Number of Wind Azimuth": 16,
 		"Base Wind Azimuth [deg]" : 0
 	},
@@ -104,14 +104,14 @@
 		"__comment": "マッハ数依存を考慮する場合は対応するFile Existをtrueにしてcsvパスを指定。考慮しない場合はfalseのままConstant値を入力",
 		"Cd File": "config/Cd.csv",
 		"Cd File Exist":false,
-		"Constant Cd":"0.53",
+		"Constant Cd":"0.48",
 		"Length-C.P. File": "config/Lcp.csv",
 		"Length-C.P. File Exist":false,
 		"Constant Length-C.P. from Nosetip [m]": 1.2415,
 		"CNa File": "config/CNa.csv",
 		"CNa File Exist":false,
 		"Constant CNa": 9.102,
-		"Roll Dumping Moment Coefficient Clp": "-0.019",
+		"Roll Dumping Moment Coefficient Clp": "-22.4",
 		"Pitch Dumping Moment Coefficient Cmq": "-3.03"
 	},
 
