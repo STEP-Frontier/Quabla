@@ -61,12 +61,12 @@
 	},
 
 	"Structure": {
-		"Length [m]": 1.640,
+		"Length [m]": 1.643,
 		"Diameter [m]": 0.112,
-		"Dry Mass [kg]":7.293,
-		"Dry Length-C.G. from Nosetip [m]": 0.943,
-		"Dry Moment of Inertia Roll-Axis [kg*m^2]":"0.012157",
-		"Dry Moment of Inertia  Pitch-Axis [kg*m^2]":"2.0725",
+		"Dry Mass [kg]":7.312,
+		"Dry Length-C.G. from Nosetip [m]": 0.9437,
+		"Dry Moment of Inertia Roll-Axis [kg*m^2]":"0.0121886",
+		"Dry Moment of Inertia  Pitch-Axis [kg*m^2]":"2.08536",
 		"Upper Launch Lug [m]": "0.386263",
 		"Lower Launch Lug [m]": "0.256218"
 	},
@@ -107,12 +107,12 @@
 		"Constant Cd":"0.48",
 		"Length-C.P. File": "config/Lcp.csv",
 		"Length-C.P. File Exist":false,
-		"Constant Length-C.P. from Nosetip [m]": 1.2415,
+		"Constant Length-C.P. from Nosetip [m]": 1.2438,
 		"CNa File": "config/CNa.csv",
 		"CNa File Exist":false,
 		"Constant CNa": 9.102,
 		"Roll Dumping Moment Coefficient Clp": "-22.4",
-		"Pitch Dumping Moment Coefficient Cmq": "-3.03"
+		"Pitch Dumping Moment Coefficient Cmq": "-3.04"
 	},
 
 	"Payload":{
